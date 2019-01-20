@@ -1,0 +1,7 @@
+<% unless flash.blank? %>
+    <% flash.each do |key, msg| %>
+      <div id="messages" class="clear alert mb-0 alert-<%= key %> text-center" role="alert">
+        <%= content_tag(:div, msg, :class => "#{key} message", :id => "#{key}_message") %>
+      </div>
+    <% end %>
+<% end %>

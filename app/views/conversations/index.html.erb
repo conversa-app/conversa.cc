@@ -1,0 +1,8 @@
+
+  <%= link_to("Create New Conversation", new_conversation_path, class: 'action btn btn-primary btn-new float-md-right') %>
+  <span class="clearfix"></span>
+
+
+<% @conversations.each do |conversation| %>
+  <%= conversation.topic %>
+<% end %>

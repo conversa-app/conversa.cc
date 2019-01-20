@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0,maximum-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="The Ryan Office">
+    <meta name="description" content='Privately track your accomplishments, projects, and all of the good stuff you do in real-time so you’ll always be ready for your next career opportunity.'>
+    <meta name="keywords" content="<%= @meta_keywords || 'conversa' %>">
+    <meta name="robots" content="<%= @norobots ? "nofollow,noindex" : "follow,index" %>">
+    <meta name="revisit-after" content="3 days" />
+    <meta name="format-detection" content="telephone=no">
+
+    <title><%= BRAND %> | <%= content_for?(:title) ? yield(:title) : 'conversa' %></title>
+
+    <%= stylesheet_link_tag("application") %>
+    <%= javascript_include_tag("application") %>
+
+    <%= csrf_meta_tags %>
+
+    <% if Rails.env.production? %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116295734-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-116295734-1');
+      </script>
+    <!-- Google Tag Manager -->
+    <% end %>
+
+    <%= yield(:javascript) %>
+  </head>
+
+  <body>
+
+    <% if Rails.env.production? %>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=ID"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <% end %>
+
+    <div class="header" id="headerBox">
+      <%# render partial: 'layouts/navigation' %>
+    </div>
+    <%= render(:partial => 'application/flash_messages') %>
+    <div class=<%= @fluid ? "container-fluid" : "container" %>>
+      <%= yield %>
+    </div>
+
+    <%# render partial: 'layouts/footer' %>
+
+  </body>
+
+</html>

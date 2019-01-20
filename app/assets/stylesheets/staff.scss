@@ -1,0 +1,186 @@
+@import "variables";
+@import "bootstrap";
+@import "open-iconic-bootstrap";
+
+.table {
+  margin-top:15px;
+}
+
+.btn-new, .btn-new:visited {
+  color: #fff;
+  background-color: #5CCC4E;
+  border-color: #5CCC4E;
+  &:hover {
+    color: #fff;
+    background-color: #50B244;
+    border-color: #50B244;
+  }
+}
+
+.btn-view, .btn-view:visited {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  &:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+  }
+}
+
+.btn-edit, .btn-edit:visited {
+  color: #fff;
+  background: #f0ad4e;
+  border-color: #eea236;
+  &:hover {
+   color: #fff;
+   background: #ec971f;
+   border-color: #d58512;
+  }
+}
+
+.btn-delete, .btn-delete:visited {
+  color: #fff;
+  background: #d9534f;
+  border-color: #d43f3a;
+  &:hover {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925;
+  }
+}
+
+.btn-cancel, .btn-cancel:visited {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  &:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+}
+
+.btn-back, .btn-back:visited {
+  margin: 1rem 0;
+  color: #fff;
+  background-color: #4da9df;
+  border-color: #4da9df;
+  &:hover {
+    color: #fff;
+    background-color: #2d99d9;
+    border-color: #2693d3;
+  }
+}
+
+.icon-red {
+  color: red;
+}
+
+.icon-green {
+  color: green;
+}
+
+table.align-middle {
+  td {
+    vertical-align: middle !important;
+  }
+}
+
+
+.sidebar {
+  position: fixed;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+}
+
+.file-upload label {
+  color: red;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.thumbnails-preview {
+  margin:20px 0px;
+  img { width:200px; }
+}
+
+.level-0 {
+  background: #CCC;
+}
+.level-0 #title {
+  font-weight: bold;
+}
+.level-1 #title {
+  padding-left: 2em;
+}
+.level-2 #title {
+  padding-left: 4em;
+}
+.level-3 #title {
+  padding-left: 6em;
+}
+
+.permissions {
+  h2 {
+    font-size: 24px;
+  }
+  label {
+    margin-left: 10px;
+  }
+}
+
+   a.download img.brochure {
+    display: inline-block;
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    margin-top: 0.125rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+   a.download p { 
+  font-family: "Gotham Narrow A", "Gotham Narrow B";
+  font-style: normal;
+  font-weight: 500;
+  color: rgb(0,174,239);
+  line-height: 1.125;
+  text-align: left;
+  background-image: image-url('icon/download_block.svg');
+  background-repeat: no-repeat;
+  background-position: left top 0.2rem;
+  background-size: 0.65rem;
+  padding: 0 0 0 1.125rem;
+  margin-bottom: 1rem;
+  opacity: 0.65;
+    transition: all 0.5s ease;
+}
+
+ a.download.action p { 
+  color: rgb(246,141,46);
+  background-image: image-url('icon/download_block_action.svg');
+}
+
+.aside p { 
+  text-align: left;
+}
+
+.aside p a { 
+  display: inline;
+}
+
+.menu-link {
+  margin-bottom: 20px;
+}
+
+.card-body .menu-link:last-child {
+  margin-bottom: 0px;
+}

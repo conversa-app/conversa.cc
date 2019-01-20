@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title><%= BRAND %> - <%= content_for?(:title) ? yield(:title) : "Staff Area" %></title>
+    <meta name="copyright" content="Copyright <%= Time.current.year %>, <%= BRAND %>" />
+    <meta name="robots" content="nofollow,noindex" />
+    <%= stylesheet_link_tag('staff', :media => 'all') %>
+    <%= javascript_include_tag("application", 'staff') %>
+    <%= csrf_meta_tag %>
+    <%= yield :head %>
+  </head>
+  <body class="staff">
+    <div class="">
+      <% if @current_admin %>
+      <nav class="d-md-none navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><%= BRAND_SHORT %> Staff Area</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="main-nav" style="">
+          <ul class="navbar-nav mr-auto">
+            <%= nav_link "Main Menu", staff_menu_path, 'access' %>
+            <%= nav_link "Users", staff_users_path, 'users' %>
+            <%= nav_link "Logout", staff_logout_path, "", {method: :delete} %>
+          </ul>
+        </div>
+      </nav>
+      <% end %>
+    </div>
+
+    <main id="mainblock" class=''>
+      <div class="row no-gutters <%= @current_admin ? "offset-md-3 offset-lg-2 col-sm-12 col-md-9 col-lg-10 p-0"  : "" %>">
+
+      <% if @current_admin %>
+        <div class="pl-2 d-none d-md-block col-md-3 col-lg-2 sidebar navbar-dark navbar-nav bg-dark">
+          <%# image_tag 'logo_no_edge.png', class: 'mb-4 brand mr-1 pr-2', alt: BRAND, width: '100%' %>
+          <ul class="nav navbar-nav nav-sidebar">
+            <%= nav_link "Main Menu", staff_menu_path, 'access', {class: "w-100"} %>
+            <%= nav_link "Users", staff_users_path, 'users', {class: "w-100"} %>
+            <%= nav_link "Logout", staff_logout_path, "", {class: "w-100", method: :delete} %>
+          </ul>
+        </div>
+        <% end %>
+
+        <div id="content" class="<%=  @current_admin ? "col-sm-12 col-md-12 no-gutters" : "col-12" %>">
+          <% if @current_admin %>
+          <h2 class="pt-3 pl-4 pb-3 border-bottom border-primary"><%= content_for?(:title) ? yield(:title) : BRAND %></h2>
+          <% end %>
+          <div class="pt-2 pl-4 pr-4">
+            <%= render(:partial => 'application/flash_messages') %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <div id="footer">
+      &nbsp;
+    </div>
+
+  </body>
+  <%= yield :javascript %>
+</html>

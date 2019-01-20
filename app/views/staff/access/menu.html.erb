@@ -1,0 +1,30 @@
+<% title "Main Menu" %>
+
+<div class="row">
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">CMS</h5>
+        <%= menu_link("Users", staff_users_path) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-4">
+    <div class="card" >
+      <div class="card-body">
+        <h5 class="card-title">Utility Areas</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Admin</h5>
+        <%= menu_link("Administrators", staff_admins_path) %>
+      </div>
+    </div>
+  </div>
+
+</div>
