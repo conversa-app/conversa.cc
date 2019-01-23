@@ -1,0 +1,108 @@
+<h1><%= @conversation.topic %></h1>
+<p><%= @conversation.description %></p>
+<%= @conversation.conversation_id %>
+
+<p>Welcome to a new kind of conversation</p> 
+
+<h2>vote on other people's statements</h2>
+
+<% cookies.permanent[:token2] = @current_user.agid %>
+<% cookies.permanent[:pid] = 1 %>
+
+  <div id="vote-container" class='border p-4' data-pid=0 data-tid=0>
+    <div class='row'>
+      <p class="question col-10">Question Text Here</p> 
+      <p class="questions-left col-1">Remaining</p>
+    </div>
+    <div class='row'>
+      <a href="#" class='col-3 vote' data-vote=1> Yes</a>
+      <a href="#" class='col-3 vote' data-vote=-1> No</a>
+      <a href="#" class='col-3 vote' data-vote=0> Pass/Unsure</a>
+    </div>
+  </div>
+
+  <%= form_for([Comment.new]) do |f| -%>
+  
+    <div class="form-group">
+
+      <%= f.text_field :content, placeholder: 'Share Your Perspective', class: 'form-control col-10 float-left' %>
+    
+      <%= submit_tag("Submit", class: 'btn btn-primary col-1 float-right') %>
+
+
+    </div>
+  <% end %>
+ 
+
+<%= content_for :javascript do %>
+  
+  <script>
+    var polisGateway = polisGateway('<%= @current_user.organization.api_key %>')
+    $(document).ready(function() {
+
+      polisGateway.participationInit('<%= @conversation.conversation_id %>')
+      .then(function(response) {
+        getNextComment(response.data.nextComment.currentPid);
+      });
+
+      $('.new_comment').submit(sendComment);
+      $('.vote').click(function(){
+        var $voteContainer = $('#vote-container');
+        polisGateway.createVote(
+          '<%= @conversation.conversation_id %>', 
+          $voteContainer.data('pid'), 
+          $voteContainer.data('tid'), 
+          '<%= @current_user.agid %>',  
+          $(this).data('vote')
+        ).then(function(){
+          getNextComment();
+          return false
+        })
+        return false;
+      })
+    });
+
+
+    function sendComment() {
+        var form = this;
+        var content = $('#comment_content').val()
+        if(content === '') {
+          return false;
+        }
+        polisGateway.createComment(
+          '<%= @current_user.agid %>',  
+          '<%= @conversation.conversation_id %>', 
+          content
+        )
+        .then(function(response) {
+          return false
+          //form.submit(function() {return true});
+          //form.submit()
+          $('comment_content').val('')
+          //form.submit(sendComment)
+          return false
+        .catch(function(error){ console.log(error); return false;})
+      });
+      return false;
+    }
+
+    function getNextComment(pid) {
+      return polisGateway.nextConversationComment('<%= @conversation.conversation_id %>', pid)
+      .then(function(response) {
+        var $voteContainer = $('#vote-container');
+        if(response.data.txt === undefined) {
+          $voteContainer.html("All Comments Voted on.")
+          return response
+        }
+        else {
+          $voteContainer.data('pid', response.data.pid)
+          $voteContainer.data('tid', response.data.tid)
+          $voteContainer.find('.question').html(response.data.txt)
+          $voteContainer.find('.questions-left').html(response.data.remaining)
+          return response;
+        }
+      })
+    }
+  </script>
+
+<% end %>

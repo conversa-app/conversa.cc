@@ -1,4 +1,4 @@
-<% title "Create Conversation" %>
+<% title "Edit Conversation" %>
 
 <div class="conversation new">
   <%= link_to("&laquo; Back to List".html_safe, conversations_path, :class => 'btn btn-primary btn-back') %>
@@ -6,7 +6,7 @@
   <%= form_for([@conversation]) do |f| -%>
     <%= render(partial: "form", locals: {f: f}) %>
     <div id="operations">
-      <%= submit_tag("Create Conversation", class: 'btn btn-primary') %>
+      <%= submit_tag("Update Conversation", class: 'btn btn-primary') %>
       <input type="button" value="Cancel" class="btn btn-default btn-cancel" onclick="window.location.href='<%= conversations_path %>';" />
     </div>
   <% end %>
@@ -20,20 +20,16 @@
       $('form').submit(function() {
       var form = this;
       polisGateway.createConversation()
-      .then(function(response) {
-        console.log(response.data.conversation_id)
-        var conversation_id = response.data.conversation_id;
-        $('#conversation_conversation_id').val(conversation_id)
-        dataOptions = {}
-        dataOptions['topic'] = $('#conversation_topic').val();
-        dataOptions['description'] = $('#conversation_description').val();
-        return polisGateway.updateConversation(conversation_id, dataOptions)
-      })
+      var conversation_id = $('#conversation_conversation_id').val();
+      dataOptions = {}
+      dataOptions['topic'] = $('#conversation_topic').val();
+      dataOptions['description'] = $('#conversation_description').val();
+      polisGateway.updateConversation(conversation_id, dataOptions)
       .then(function(response){
         form.submit(function() {return true});
-        form.submit()
+        form.submit();
       })
-      .catch(function(error){ console.log(error); return false;})
+      .catch(function(error){ console.log(error)})
       return false;
       })
     })

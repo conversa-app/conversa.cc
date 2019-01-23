@@ -1,0 +1,13 @@
+<% title "Edit Settings" %>
+
+<div class="user new">
+  <%= link_to("&laquo; Back to Conversations".html_safe, conversations_path, :class => 'btn btn-primary btn-back') %>
+
+  <%= form_for([@user]) do |f| -%>
+    <%= render(partial: "form", locals: {f: f}) %>
+    <div id="operations">
+      <%= submit_tag("Update Settings", class: 'btn btn-primary') %>
+      <input type="button" value="Cancel" class="btn btn-default btn-cancel" onclick="window.location.href='<%= conversations_path %>';" />
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<% title "Create Admin" %>
+
+<div class="admin new">
+  <%= link_to("&laquo; Back to List".html_safe, staff_admins_path, :class => 'btn btn-primary btn-back') %>
+
+  <%= form_for([:staff, @admin]) do |f| -%>
+    <%= render(partial: "form", locals: {f: f}) %>
+    <div id="operations">
+      <%= submit_tag("Create Admin", class: 'btn btn-primary') %>
+      <input type="button" value="Cancel" class="btn btn-default btn-cancel" onclick="window.location.href='<%= staff_admins_path %>';" />
+    </div>
+  <% end %>
+</div>

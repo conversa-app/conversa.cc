@@ -1,0 +1,38 @@
+<%= error_messages_for(f.object) %>
+
+<div class="row">
+
+  <div class="col-lg-12">
+
+    <dl class="form-group">
+      <dt><%= f.label 'first_name' %></dt>
+      <dd><%= f.text_field(:first_name, class: 'form-control') %></dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><%= f.label 'last_name' %></dt>
+      <dd><%= f.text_field(:last_name, class: 'form-control') %></dd>
+    </dl>
+
+    <dl class="form-group">
+        <dt><%= f.label 'username' %></dt>
+        <dd><%= f.text_field(:username, class: 'form-control') %></dd>
+    </dl>
+
+    <dl>
+      <dt><%= f.label 'email' %></dt>
+      <dd><%= f.email_field(:email, class: 'form-control') %></dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><%= f.label 'password' %></dt>
+      <dd><%= f.password_field(:password, class: 'form-control') %></dd>
+    </dl>
+
+     <dl class="form-group">
+      <dt><%= f.label 'password_confirmation' %></dt>
+      <dd><%= f.password_field(:password_confirmation, class: 'form-control') %></dd>
+    </dl>
+    </div>
+
+</div>

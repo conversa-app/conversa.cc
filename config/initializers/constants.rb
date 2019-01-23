@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-BRAND = 'CareerKeeper'
-BRAND_SHORT = 'CareerKeeper'
+BRAND = 'Conversa'
+BRAND_SHORT = 'Conversa'
 
-COMPANY = 'Career Keeper LLC'
-WEBSITE = 'careerkeeper.com'
+COMPANY = 'Conversa.cc'
+WEBSITE = 'conversa.cc'
 
 STANDARD_EMAIL_REGEX = /\A[a-z0-9_\-\.%+]+@[a-z0-9\-\.]+\.[a-z]+\Z/i.freeze
 

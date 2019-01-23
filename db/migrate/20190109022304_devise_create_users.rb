@@ -18,6 +18,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.datetime 'remember_token_expires_at'
       t.string   'password_token'
       t.string   'time_zone'
+      t.integer  'uid'
+      t.string   'api_key'
+      t.string   'agid'
       t.index ['email'], name: 'index_users_on_email', using: :btree
       t.index ['first_name'], name: 'index_users_on_first_name', using: :btree
       t.index ['last_name'], name: 'index_users_on_last_name', using: :btree

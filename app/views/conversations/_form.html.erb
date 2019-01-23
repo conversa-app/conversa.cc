@@ -4,9 +4,16 @@
 
   <div class="col-lg-6">
 
+    <%= f.hidden_field :conversation_id %>
+
     <dl class="form-group">
       <dt><%= f.label 'topic' %></dt>
       <dd><%= f.text_field(:topic, class: 'form-control') %></dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><%= f.label 'description' %></dt>
+      <dd><%= f.text_area(:description, class: 'form-control') %></dd>
     </dl>
   </div>
 

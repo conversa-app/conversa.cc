@@ -4,5 +4,11 @@
 
 
 <% @conversations.each do |conversation| %>
-  <%= conversation.topic %>
+  <p>
+    <%= conversation.topic %>  
+    <%= conversation.description %> 
+    <%= conversation.conversation_id %> 
+    <%= link_to 'view', conversation_path(conversation), class: 'btn btn-primary' %> 
+    <%= link_to 'edit', edit_conversation_path(conversation), class: 'btn btn-primary' %> 
+  </p>
 <% end %>

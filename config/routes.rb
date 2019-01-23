@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'conversations#index'
   get 'login' => 'access#new'
   get 'reset/:token', to: 'access#reset_password', as: 'reset_password'
+  get 'invite', to: 'users#new', as: 'invite'
   get 'settings', to: 'users#edit', as: 'settings'
   get 'validation_failed' => 'users#validation_failed'
 
@@ -31,6 +32,8 @@ Rails.application.routes.draw do
       get :resend_validation_email
     end
   end
+
+  resources :comments
 
   namespace :staff do
     mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new

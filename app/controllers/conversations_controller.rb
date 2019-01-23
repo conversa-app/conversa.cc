@@ -32,7 +32,7 @@ class ConversationsController < ApplicationController
     @conversation = @org.conversations.find(params[:id])
     if @conversation.update_attributes(conversation_params)
       flash[:notice] = "The conversation was updated"
-      redirect_to conversation_path(@page_asset)
+      redirect_to conversation_path(@conversation)
     else
       render('edit')
     end
