@@ -32,7 +32,7 @@
 #  help_type                      :string
 #  context                        :string
 #  email_domain                   :string
-#  conversation_id                :integer
+#  conversation_id                :string
 #  course_id                      :integer
 #  participant_count              :integer
 #  socialbtn_type                 :integer

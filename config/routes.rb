@@ -8,12 +8,17 @@ Rails.application.routes.draw do
   get 'settings', to: 'users#edit', as: 'settings'
   get 'validation_failed' => 'users#validation_failed'
 
+  post 'record_vote' => 'votes#create'
+
   delete 'logout' => 'access#destroy'
 
   resources :conversations do
     member do
       get :delete
     end
+
+    resources :comments
+
   end
 
   resource :access, controller: 'access', except: %i[show edit update] do
@@ -32,8 +37,6 @@ Rails.application.routes.draw do
       get :resend_validation_email
     end
   end
-
-  resources :comments
 
   namespace :staff do
     mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new

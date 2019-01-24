@@ -72,6 +72,23 @@ export default polisGateway = (auth_key, environment = 'development') => {
         });
     }
 
+    const updateComment = (conversation_id, tid, active, is_meta) => {
+      return axios({
+            method: 'put',
+            url: url + '/comments',
+            responseType: 'json',
+            data: {
+                polisApiKey: auth_key,
+                conversation_id: conversation_id,
+                tid: tid,
+                mod: 0,
+                velocity: 1,
+                active: active,
+                is_meta: is_meta
+            }
+        });
+    }
+
     const restGetParticipation = (conversationId) => {
         return axios({
             method: 'get',
@@ -151,6 +168,7 @@ export default polisGateway = (auth_key, environment = 'development') => {
     getConversationZid: getConversationZid,
     updateConversation: updateConversation,
     createComment: createComment,
+    updateComment: updateComment,
     createVote: createVote,
     restGetParticipation:restGetParticipation,
     participationInit: participationInit,

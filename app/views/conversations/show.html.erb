@@ -7,7 +7,6 @@
 <h2>vote on other people's statements</h2>
 
 <% cookies.permanent[:token2] = @current_user.agid %>
-<% cookies.permanent[:pid] = 1 %>
 
   <div id="vote-container" class='border p-4' data-pid=0 data-tid=0>
     <div class='row'>
@@ -21,7 +20,7 @@
     </div>
   </div>
 
-  <%= form_for([Comment.new]) do |f| -%>
+  <%= form_for([@conversation, Comment.new]) do |f| -%>
   
     <div class="form-group">
 
@@ -39,24 +38,29 @@
   <script>
     var polisGateway = polisGateway('<%= @current_user.organization.api_key %>')
     $(document).ready(function() {
-
-      polisGateway.participationInit('<%= @conversation.conversation_id %>')
+      cookies.erase('pid')
+      polisGateway.nextConversationComment('<%= @conversation.conversation_id %>', null)
       .then(function(response) {
-        getNextComment(response.data.nextComment.currentPid);
+        cookies.set('pid', String(response.data.currentPid));
+        getNextComment(response.data.currentPid);
       });
 
       $('.new_comment').submit(sendComment);
       $('.vote').click(function(){
         var $voteContainer = $('#vote-container');
+        var vote = $(this).data('vote');
         polisGateway.createVote(
           '<%= @conversation.conversation_id %>', 
           $voteContainer.data('pid'), 
           $voteContainer.data('tid'), 
           '<%= @current_user.agid %>',  
-          $(this).data('vote')
+          vote
         ).then(function(){
-          getNextComment();
-          return false
+          recordVote(vote, $voteContainer.data('tid'))
+          .then(function(){
+            getNextComment();
+            return false
+          })
         })
         return false;
       })
@@ -75,15 +79,15 @@
           content
         )
         .then(function(response) {
-          return false
-          //form.submit(function() {return true});
-          //form.submit()
-          $('comment_content').val('')
-          //form.submit(sendComment)
-          return false
-        .catch(function(error){ console.log(error); return false;})
-      });
-      return false;
+          recordComment(response.data.tid)
+          .then(function(){
+              $('#comment_content').val('')
+              return false
+            })
+        
+        })
+        .catch(function(error){ console.log(error); return false;});
+        return false;
     }
 
     function getNextComment(pid) {
@@ -102,6 +106,34 @@
           return response;
         }
       })
+    }
+
+    function recordComment(tid) {
+        return axios({
+            url: '<%= conversation_comments_path(@conversation) %>',
+            method: "POST",
+            headers: {
+              'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            },
+            data: {
+                content: $('#comment_content').val(),
+                tid: tid
+            },
+        })
+    }
+
+    function recordVote(vote, tid) {
+        return axios({
+            url: '<%= record_vote_path %>',
+            method: "POST",
+            headers: {
+              'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            },
+            data: {
+                vote: vote,
+                tid: tid
+            },
+        })
     }
   </script>
 

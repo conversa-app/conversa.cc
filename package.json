@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
+    "browser-cookies": "^1.2.0",
     "cookies": "^0.7.3"
   },
   "devDependencies": {

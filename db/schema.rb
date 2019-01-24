@@ -48,10 +48,14 @@ ActiveRecord::Schema.define(version: 2019_01_23_165309) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "conversation_id"
     t.string "content"
     t.boolean "votable"
+    t.boolean "active"
+    t.integer "tid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_comments_on_conversation_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 

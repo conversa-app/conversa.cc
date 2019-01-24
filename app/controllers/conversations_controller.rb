@@ -58,4 +58,24 @@ class ConversationsController < ApplicationController
     @org = current_user.organization
   end
 
+  def add_agid
+    if Rails.env == 'development'
+      url = 'http://localhost:5000/api/v3//participationInit'
+    else
+      url = 'https://polis-api-proxy.herokuapp.com/api/v3/participationInit'
+    end
+    uri = URI(url)
+    response = Net::HTTP.get_response(uri)
+    if (response.code == '200')
+    all_cookies = response.get_fields('set-cookie')
+    cookies_array = Array.new
+    all_cookies.each { | cookie |
+        cookies_array.push(cookie.split('; ')[0])
+    }
+    agid = cookies_array[0].split('token2=')[1]
+    self.agid = agid
+    save
+    end
+  end
+
 end

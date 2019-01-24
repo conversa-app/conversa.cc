@@ -1,0 +1,66 @@
+<ul>
+  <% @comments.each do |comment| %>
+  <li class='p-4'>
+    <%= comment.content %><br />
+    <%= label_tag 'votable:' %>
+    <%= check_box_tag :votable, '', comment.votable, {'data-id': comment.id, 'data-tid': comment.tid, class: 'is-votable'} %>
+    <%= link_to 'reject', '#', class: 'reject-comment btn btn-warning', 'data-id': comment.id, 'data-tid': comment.tid %>
+
+    </li>
+  <% end %>
+</ul>
+
+<%= content_for :javascript do %>
+  
+  <script>
+    var polisGateway = polisGateway('<%= @current_user.organization.api_key %>')
+    $(document).ready(function() {
+      $('.is-votable').change(function(){
+        var $self = $(this)
+        var is_meta =  !$self.is(':checked');
+        polisGateway.updateComment(
+          '<%= @conversation.conversation_id %>', 
+          $self.data('tid'), 
+          true,
+          is_meta
+        ).then(function() {
+          updateComment( $self.data('id'), is_meta, true)
+          return false;
+        })
+        return false;
+      })
+
+      $('.reject-comment').click(function(){
+        var $self = $(this)
+        polisGateway.updateComment(
+          '<%= @conversation.conversation_id %>', 
+          $self.data('tid'), 
+          false,
+          true
+        ).then(function() {
+          return updateComment( $self.data('id'), true, false)
+        })
+        .then(function() {
+          $($self).parent().remove();
+        })
+        return false;
+      })
+
+    });
+
+    function updateComment(id, is_meta, active) {
+        return axios({
+            url: "/conversations/<%= @conversation.id %>/comments/" + id,
+            method: "Put",
+            headers: {
+              'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            },
+            data: {
+                votable: !is_meta,
+                active: active
+            },
+        })
+    }
+  </script>
+
+<% end %>

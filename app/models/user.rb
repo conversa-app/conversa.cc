@@ -19,6 +19,7 @@
 #  time_zone                 :string
 #  uid                       :integer
 #  api_key                   :string
+#  agid                      :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #
@@ -36,6 +37,9 @@ class User < ApplicationRecord
   before_create :create_email_validation_token
   after_create :add_agid
   after_update :send_validation_after_email_changed, if: -> { saved_changes[:email] }
+  has_many :comment_votes
+  has_many :comments
+
 
   validates :first_name, length: { within: 2..50 }
   validates :last_name, length: { within: 2..50 }

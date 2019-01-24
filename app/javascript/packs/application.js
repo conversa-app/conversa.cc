@@ -9,5 +9,10 @@
 
 console.log('Hello World from Webpacker')
 import polisGateway from '../polisGateway'
+import cookies from 'browser-cookies'
+import axios from 'axios'
 
 window.polisGateway = polisGateway;
+
+window.cookies = cookies
+window.axios = axios
