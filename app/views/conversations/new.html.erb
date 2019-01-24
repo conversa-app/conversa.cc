@@ -19,19 +19,23 @@
     $(document).ready(function() {
       $('form').submit(function() {
       var form = this;
+      var conversation_id
+      var dataOptions = {}
       polisGateway.createConversation()
       .then(function(response) {
         console.log(response.data.conversation_id)
-        var conversation_id = response.data.conversation_id;
+        conversation_id = response.data.conversation_id;
         $('#conversation_conversation_id').val(conversation_id)
-        dataOptions = {}
         dataOptions['topic'] = $('#conversation_topic').val();
         dataOptions['description'] = $('#conversation_description').val();
-        return polisGateway.updateConversation(conversation_id, dataOptions)
+      })
+      .then(function() {
+        polisGateway.updateConversation(conversation_id, dataOptions)
       })
       .then(function(response){
         form.submit(function() {return true});
         form.submit()
+        return false;
       })
       .catch(function(error){ console.log(error); return false;})
       return false;
