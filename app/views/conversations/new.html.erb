@@ -13,7 +13,7 @@
 </div>
 
 <%= content_for :javascript do %>
-  
+
   <script>
     var polisGateway = polisGateway('<%= @current_user.organization.api_key %>')
     $(document).ready(function() {
@@ -23,11 +23,14 @@
       var dataOptions = {}
       polisGateway.createConversation()
       .then(function(response) {
-        console.log(response.data.conversation_id)
         conversation_id = response.data.conversation_id;
+        if(conversation_id === '' || conversation_id === undefined) {
+          throw "no conversation_id"
+        }
         $('#conversation_conversation_id').val(conversation_id)
         dataOptions['topic'] = $('#conversation_topic').val();
         dataOptions['description'] = $('#conversation_description').val();
+        return sleep(250)
       })
       .then(function() {
         polisGateway.updateConversation(conversation_id, dataOptions)
@@ -41,6 +44,12 @@
       return false;
       })
     })
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+
   </script>
 
 <% end %>

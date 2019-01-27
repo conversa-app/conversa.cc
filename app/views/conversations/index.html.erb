@@ -2,14 +2,13 @@
   <%= link_to("Create New Conversation", new_conversation_path, class: 'action btn btn-primary btn-new float-md-right') %>
   <span class="clearfix"></span>
 
-
 <% @conversations.each do |conversation| %>
   <p>
-    <%= conversation.topic %>  
-    <%= conversation.description %> 
-    <%= conversation.conversation_id %> 
-    <%= link_to 'view', conversation_path(conversation), class: 'btn btn-primary' %> 
-    <%= link_to 'moderate', conversation_comments_path(conversation), class: 'btn btn-primary' %> 
-    <%= link_to 'edit', edit_conversation_path(conversation), class: 'btn btn-primary' %> 
+    <%= conversation.topic %>
+    <%= conversation.description %>
+    <%= conversation.conversation_id %>
+    <%= link_to 'view', conversation_path(conversation), class: 'btn btn-primary' %>
+    <%= link_to 'moderate', conversation_comments_path(conversation), class: 'btn btn-primary' %>
+    <%= link_to 'edit', edit_conversation_path(conversation), class: 'btn btn-primary' %>
   </p>
 <% end %>

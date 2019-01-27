@@ -19,12 +19,12 @@ ActiveRecord::Base.connection.tables.each do |table|
 end
 
 org = Organization.create!(name: 'DS', uid: '402281', api_key: 'pkey_DSdDhue76HwR4y2WugRT2')
-org2= Organization.create!(name: 'OS', uid: 402281, api_key: 'pkey_OSFDhue76HwR4y2WugRT2')
-org3 = Organization.create!(name: 'Ford & Sloan', uid: 402281, api_key: 'pkey_FFdDhue76HwR4y2WugRT2')
+#org2= Organization.create!(name: 'OS', uid: 402282, api_key: 'pkey_OSFDhue76HwR4y2WugRT2')
+#org3 = Organization.create!(name: 'Ford & Sloan', uid: 402283, api_key: 'pkey_FFdDhue76HwR4y2WugRT2')
 
 
-user = User.create! first_name: 'matthew', last_name: 'bergman', :email => 'mzbphoto@gmail.com', :password => 'password123', 
+user = User.create! first_name: 'matthew', last_name: 'bergman', :email => 'mzbphoto@gmail.com', :password => 'password123',
 :password_confirmation => 'password123', organization: org
 
-admin = Admin.create!  first_name: 'matthew', last_name: 'bergman',:email => 'matt@novafabrica.com', 
+admin = Admin.create!  first_name: 'matthew', last_name: 'bergman',:email => 'matt@novafabrica.com',
 :password => 'password123', :password_confirmation => 'password123'

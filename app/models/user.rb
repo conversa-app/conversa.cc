@@ -99,9 +99,9 @@ class User < ApplicationRecord
 
   def add_agid
     if Rails.env == 'development'
-      url = 'http://localhost:5000/api/v3/comments?conversation_id=2beujdbeya&agid=1'
+      url = "http://localhost:5000/api/v3/comments?conversation_id=#{organization.seed_conversation_id}&agid=1"
     else
-      url = 'https://polis-api-proxy.herokuapp.com/api/v3/comments?conversation_id=2beujdbeya&agid=1'
+      url = "https://polis-api-proxy.herokuapp.com/api/v3/comments?conversation_id=2beujdbeya&agid=1"
     end
     uri = URI(url)
     response = Net::HTTP.get_response(uri)

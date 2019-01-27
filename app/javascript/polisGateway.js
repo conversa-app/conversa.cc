@@ -37,7 +37,7 @@ export default polisGateway = (auth_key, environment = 'development') => {
     }
 
     const updateConversation = (conversation_id, dataOptions) => {
-      var data = { polisApiKey: auth_key } 
+      var data = { polisApiKey: auth_key }
       data['conversation_id'] = conversation_id
       data = Object.assign({}, data, dataOptions)
       return axios({
@@ -105,19 +105,19 @@ export default polisGateway = (auth_key, environment = 'development') => {
             url: url + '/participationInit',
             method: "get",
             withCredentials: true,
-            responseType: 'json', 
+            responseType: 'json',
             params: {
                 conversation_id: conversationId,
             }
         });
     }
-    
+
     const nextConversationComment = (conversationId, pid) => {
         return axios({
             url: url + '/nextComment',
             method: "get",
             withCredentials: true,
-            responseType: 'json', 
+            responseType: 'json',
             params: {
                 not_voted_by_pid: 1,
                 conversation_id: conversationId,
@@ -141,7 +141,31 @@ export default polisGateway = (auth_key, environment = 'development') => {
             },
         })
     }
-   
+
+    const createReport = (conversation_id) =>  {
+        return axios({
+            url: url + '/reports',
+            method: "post",
+            responseType: 'json',
+            data: {
+                conversation_id: conversation_id,
+                polisApiKey: auth_key
+            },
+        })
+    }
+
+    const getReport = (conversation_id) =>  {
+        return axios({
+            url: url + '/reports',
+            method: "get",
+            responseType: 'json',
+            params: {
+                conversation_id: conversation_id,
+                polisApiKey: auth_key
+            },
+        })
+    }
+
     const restPostComment = (agid, conversation_id, pid, comment)  => {
         return axios({
             url: url + "/" + conversationId + "/comments",
@@ -170,6 +194,8 @@ export default polisGateway = (auth_key, environment = 'development') => {
     createComment: createComment,
     updateComment: updateComment,
     createVote: createVote,
+    createReport: createReport,
+    getReport: getReport,
     restGetParticipation:restGetParticipation,
     participationInit: participationInit,
     nextConversationComment: nextConversationComment

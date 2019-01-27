@@ -4,6 +4,7 @@ class CreateOrganizations < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :uid
       t.string :api_key
+      t.string :seed_conversation_id
       t.timestamps
     end
   end

@@ -14,5 +14,24 @@ class Organization < ApplicationRecord
 
   has_many :users
   has_many :conversations
-  
+
+  after_create :create_dummy_conversation
+
+  private
+
+  def create_dummy_conversation
+    if Rails.env == 'development'
+      url = 'http://localhost:5000/api/v3/conversations'
+    else
+      url = 'https://polis-api-proxy.herokuapp.com/api/v3/conversations'
+    end
+    response = Excon.post(url,
+      :body => "polisApiKey=#{self.api_key}",
+      :headers => { "Content-Type" => "application/x-www-form-urlencoded" }
+    )
+    p JSON.parse(response.body)
+    self.seed_conversation_id = JSON.parse(response.body)['conversation_id']
+    save
+  end
+
 end

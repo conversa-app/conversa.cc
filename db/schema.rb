@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2019_01_23_165309) do
     t.bigint "user_id"
     t.bigint "conversation_id"
     t.string "content"
-    t.boolean "votable"
-    t.boolean "active"
+    t.boolean "votable", default: true
+    t.boolean "active", default: true
     t.integer "tid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2019_01_23_165309) do
     t.string "name"
     t.integer "uid"
     t.string "api_key"
+    t.string "seed_conversation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
