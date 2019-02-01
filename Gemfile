@@ -33,6 +33,7 @@ gem 'sidekiq'
 gem 'will_paginate'
 gem 'high_voltage'
 gem "sentry-raven"
+gem 'omniauth-saml'
 
 
 # Use ActiveStorage variant
