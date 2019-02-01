@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_01_23_165309) do
     t.string "link_url"
     t.string "parent_url"
     t.string "style_btn"
+    t.string "report_id"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

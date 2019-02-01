@@ -8,7 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 console.log('Hello World from Webpacker')
-import polisGateway from '../polisGateway'
+import polisGateway from '../polisGateway.js.erb'
 import cookies from 'browser-cookies'
 import axios from 'axios'
 

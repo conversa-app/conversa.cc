@@ -25,7 +25,9 @@ class Organization < ApplicationRecord
       :body => "polisApiKey=#{self.api_key}",
       :headers => { "Content-Type" => "application/x-www-form-urlencoded" }
     )
-    self.seed_conversation_id = JSON.parse(response.body)['conversation_id']
+    conversation_id = JSON.parse(response.body)['conversation_id']
+    self.seed_conversation_id = conversation_id
+    self.conversations.create(conversation_id: conversation_id, topic: 'Starter Conversation', description: 'This is your seed conversation.')
     save
   end
 

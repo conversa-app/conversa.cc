@@ -4,6 +4,8 @@
 
 <p>Welcome to a new kind of conversation</p> 
 
+<p>View report <%= link_to "https://preprod.pol.is/report/#{@conversation.report_id}", "https://preprod.pol.is/report/#{@conversation.report_id}" %> </p>
+
 <h2>vote on other people's statements</h2>
 
 <% cookies.permanent[:token2] = @current_user.agid %>

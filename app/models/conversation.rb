@@ -53,4 +53,23 @@
 class Conversation < ApplicationRecord
 
   has_many :comments
+  belongs_to :organization
+
+  after_create :create_report_id
+
+  private
+
+  def create_report_id
+    url = Rails.application.credentials.production[:polis] + "/reports"
+    response = Excon.post(url,
+      :body => "polisApiKey=#{self.organization.api_key}&conversation_id=#{self.conversation_id}",
+      :headers => { "Content-Type" => "application/x-www-form-urlencoded" }
+    )
+    url = Rails.application.credentials.production[:polis] + 
+    "/reports?polisApiKey=#{self.organization.api_key}&conversation_id=#{self.conversation_id}"
+    response = Excon.get(url)
+    self.report_id = rid
+    save
+  end
+
 end

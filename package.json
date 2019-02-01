@@ -5,7 +5,8 @@
     "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
     "browser-cookies": "^1.2.0",
-    "cookies": "^0.7.3"
+    "cookies": "^0.7.3",
+    "rails-erb-loader": "^5.5.1"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
