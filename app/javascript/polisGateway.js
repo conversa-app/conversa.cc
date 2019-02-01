@@ -5,7 +5,7 @@ let polisGateway;
 
 export default polisGateway = (auth_key, environment = 'development') => {
 
-    const url = environment === 'development' ? 'http://localhost:5000/api/v3' : 'https://polis-api-proxy.herokuapp.com/api/v3'
+    const url = Rails.application.credentials.production[:polis]
 
     const getPid = (conversationId) => {
         return restGetParticipation(conversationId).then(response => {
