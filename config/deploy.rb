@@ -40,7 +40,7 @@ namespace :app do
   task :restart do
     on roles(:web) do |_host|
       within release_path do
-        execute :sudo, :monit, :restart, 'sidekiq'
+       # execute :sudo, :monit, :restart, 'sidekiq'
         execute :sudo, :systemctl, :restart, 'puma.service'
       end
     end
