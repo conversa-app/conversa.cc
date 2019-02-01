@@ -19,7 +19,7 @@ ActiveRecord::Base.connection.tables.each do |table|
 end
 
 org = Organization.create!(name: 'DS', uid: '402281', api_key: 'pkey_DSdDhue76HwR4y2WugRT2')
-#org2= Organization.create!(name: 'OS', uid: 402282, api_key: 'pkey_OSFDhue76HwR4y2WugRT2')
+org2= Organization.create!(name: 'OS', uid: 402282, api_key: 'pkey_OSFDhue76HwR4y2WugRT2')
 #org3 = Organization.create!(name: 'Ford & Sloan', uid: 402283, api_key: 'pkey_FFdDhue76HwR4y2WugRT2')
 
 
