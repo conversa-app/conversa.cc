@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user.organization = @current_user.organization
     if @user.save
       flash[:notice] = 'The user user was successfully created.'
-      redirect_to staff_users_path
+      redirect_to root_path
     else
       render('new')
     end

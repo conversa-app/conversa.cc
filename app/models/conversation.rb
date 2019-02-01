@@ -68,6 +68,7 @@ class Conversation < ApplicationRecord
     url = Rails.application.credentials.production[:polis] + 
     "/reports?polisApiKey=#{self.organization.api_key}&conversation_id=#{self.conversation_id}"
     response = Excon.get(url)
+    rid = JSON.parse(response.body)[0]["report_id"]
     self.report_id = rid
     save
   end
