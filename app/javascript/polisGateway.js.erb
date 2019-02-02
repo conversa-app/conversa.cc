@@ -39,8 +39,6 @@ export default polisGateway = (auth_key, environment = 'development') => {
     }
 
     const updateConversation = (conversation_id, dataOptions) => {
-      pid = cookies.get('pid')
-      cookies.erase('pid')
       var data = { polisApiKey: auth_key }
       data['conversation_id'] = conversation_id
       data = Object.assign({}, data, dataOptions)
@@ -49,11 +47,7 @@ export default polisGateway = (auth_key, environment = 'development') => {
             url: url + '/conversations',
             responseType: 'json',
             data: data
-        })
-      .then(function(response){
-        cookies.set('pid')
-        return response;
-      });
+        });
     }
 
     const getConversationZid = (conversation_id) => {
@@ -68,6 +62,8 @@ export default polisGateway = (auth_key, environment = 'development') => {
     }
 
     const createComment = (agid, conversation_id, content) => {
+      pid = cookies.get('pid')
+      cookies.erase('pid')
       return axios({
             method: 'post',
             url: url + '/comments',
@@ -78,7 +74,11 @@ export default polisGateway = (auth_key, environment = 'development') => {
                 conversation_id: conversation_id,
                 txt: content
             }
-        });
+        })
+      .then(function(response){
+        cookies.set('pid', pid)
+        return response;
+      });
     }
 
     const updateComment = (conversation_id, tid, active, is_meta) => {
