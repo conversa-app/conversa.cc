@@ -1,4 +1,5 @@
 import axios from "axios"
+import cookies from 'browser-cookies'
 
 
 let polisGateway;
@@ -6,6 +7,7 @@ let polisGateway;
 export default polisGateway = (auth_key, environment = 'development') => {
 
     const url = "<%= Rails.application.credentials[Rails.env.to_sym][:polis] %>"
+    let pid = null;
 
     const getPid = (conversationId) => {
         return restGetParticipation(conversationId).then(response => {
@@ -37,6 +39,8 @@ export default polisGateway = (auth_key, environment = 'development') => {
     }
 
     const updateConversation = (conversation_id, dataOptions) => {
+      pid = cookies.get('pid')
+      cookies.erase('pid')
       var data = { polisApiKey: auth_key }
       data['conversation_id'] = conversation_id
       data = Object.assign({}, data, dataOptions)
@@ -45,7 +49,11 @@ export default polisGateway = (auth_key, environment = 'development') => {
             url: url + '/conversations',
             responseType: 'json',
             data: data
-        });
+        })
+      .then(function(response){
+        cookies.set('pid')
+        return response;
+      });
     }
 
     const getConversationZid = (conversation_id) => {
