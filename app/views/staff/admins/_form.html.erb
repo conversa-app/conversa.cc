@@ -2,7 +2,7 @@
 
 <div class="row">
 
-  <div class="col-lg-6">
+  <div class="col-lg-12">
 
     <dl class="form-group">
       <dt><%= f.label 'first_name' %></dt>
@@ -35,20 +35,5 @@
     </dl>
     </div>
 
-    <div class="permissions col-lg-5 offset-lg-1">
-      <ul class="checkbox-fields list-group list-group-flush">
-        <li class="list-group-item list-group-item-dark">
-          <h2>Permissions</h2>
-        </li>
-        <% Permission.sections.each do |section| %>
-        <li class="list-group-item list-group-item-dark" style="padding:5px;">
-          <% css_id = "permissions_#{section[:name].gsub('/', '_')}" %>
-          <% disabled = section[:name] == 'staff/admins' &&
-                        session[:admin_id].to_i == @admin.id %>
-          <%= check_box_tag("permissions[]", section[:name], @admin.permission_for?(section[:name]), :id => css_id, :disabled => disabled) %>
-          <%= label_tag(css_id, section[:label]) %></li>
-        <% end %>
-      </ul>
-    </div>
 
 </div>
