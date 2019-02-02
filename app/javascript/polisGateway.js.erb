@@ -5,7 +5,7 @@ let polisGateway;
 
 export default polisGateway = (auth_key, environment = 'development') => {
 
-    const url = "<%= Rails.application.credentials.production[:polis] %>"
+    const url = "<%= Rails.application.credentials[Rails.env.to_sym][:polis] %>"
 
     const getPid = (conversationId) => {
         return restGetParticipation(conversationId).then(response => {

@@ -60,7 +60,7 @@ class Conversation < ApplicationRecord
   private
 
   def create_report_id
-    url = Rails.application.credentials.production[:polis] + "/reports"
+    url = Rails.application.credentials[Rails.env.to_sym][:polis] + "/reports"
     response = Excon.post(url,
       :body => "polisApiKey=#{self.organization.api_key}&conversation_id=#{self.conversation_id}",
       :headers => { "Content-Type" => "application/x-www-form-urlencoded" }

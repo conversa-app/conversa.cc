@@ -98,7 +98,7 @@ class User < ApplicationRecord
   private
 
   def add_agid
-    url = Rails.application.credentials.production[:polis] + 
+    url = Rails.application.credentials[Rails.env.to_sym][:polis] + 
     "/comments?conversation_id=#{organization.seed_conversation_id}&agid=1"
     uri = URI(url)
     response = Net::HTTP.get_response(uri)

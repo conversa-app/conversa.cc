@@ -20,7 +20,7 @@ class Organization < ApplicationRecord
   private
 
   def create_dummy_conversation
-    url = Rails.application.credentials.production[:polis] + "/conversations"
+    url = Rails.application.credentials[Rails.env.to_sym][:polis] + "/conversations"
     response = Excon.post(url,
       :body => "polisApiKey=#{self.api_key}",
       :headers => { "Content-Type" => "application/x-www-form-urlencoded" }
