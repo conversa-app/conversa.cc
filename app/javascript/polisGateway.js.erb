@@ -64,6 +64,7 @@ export default polisGateway = (auth_key, environment = 'development') => {
             method: 'post',
             url: url + '/comments',
             responseType: 'json',
+            withCredentials: false,
             data: {
                 polisApiKey: auth_key,
                 conversation_id: conversation_id,
