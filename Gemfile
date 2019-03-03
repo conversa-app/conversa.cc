@@ -1,3 +1,4 @@
+source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'pg'
 gem 'rails', '~> 5.2.1'
@@ -21,7 +22,7 @@ gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'acts_as_list'
 gem 'bcrypt', '~> 3.1.7'
-gem 'bootstrap', '~> 4.1.0'
+gem 'bootstrap'
 gem 'bootstrap4-datetime-picker-rails'
 gem 'chosen-rails'
 gem 'friendly_id'
